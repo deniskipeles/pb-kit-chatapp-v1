@@ -1,0 +1,132 @@
+
+
+%block {
+    display: block;
+    width: 100%;
+}
+.content {
+    @extend %block;
+    min-width: 0;
+    & > :first-child {
+        margin-top: 0;
+    }
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.panel {
+    @extend .content;
+    background: var(--baseColor);
+    border-radius: var(--lgRadius);
+    padding: calc(var(--baseSpacing) - 5px) var(--baseSpacing);
+    @include shadowize();
+}
+
+.sub-panel {
+    @extend .content;
+    background: var(--baseColor);
+    border-radius: var(--baseRadius);
+    padding: calc(var(--smSpacing) - 5px) var(--smSpacing);
+    border: 1px solid var(--baseAlt1Color);
+}
+a,
+.btn,
+[tabindex],
+[class*="link-"],
+.handle {
+    &.fade {
+        transition: all var(--baseAnimationSpeed);
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+
+.thumb {
+    --thumbSize: 40px;
+
+    display: inline-flex;
+    vertical-align: top;
+    position: relative;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    width: var(--thumbSize);
+    height: var(--thumbSize);
+    aspect-ratio: 1;
+    background: var(--baseAlt2Color);
+    border-radius: var(--baseRadius);
+    color: var(--txtPrimaryColor);
+    outline-offset: -2px;
+    outline: 2px solid transparent;
+    @include shadowize();
+    i {
+        font-size: inherit;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        overflow: hidden;
+    }
+    &.thumb-xs {
+        --thumbSize: 24px;
+        font-size: 0.85rem;
+    }
+    &.thumb-sm {
+        --thumbSize: 32px;
+        font-size: 0.92rem;
+    }
+    &.thumb-lg {
+        --thumbSize: 60px;
+        font-size: 1.3rem;
+    }
+    &.thumb-xl {
+        --thumbSize: 80px;
+        font-size: 1.5rem;
+    }
+    &.thumb-circle {
+        border-radius: 50%;
+    }
+
+    // styles
+    @each $name, $color in $colorsMap {
+        &.thumb-#{$name} {
+            outline-color: $color;
+        }
+    }
+}
+
+.handle.thumb:not(.thumb-active),
+a.thumb:not(.thumb-active) {
+    cursor: pointer;
+    transition: opacity var(--baseAnimationSpeed),
+                outline-color var(--baseAnimationSpeed),
+                transform var(--baseAnimationSpeed),
+                box-shadow var(--baseAnimationSpeed);
+    &:hover,
+    &:focus-visible,
+    &:active {
+        opacity: 0.8;
+        @include shadowize(0px 2px 4px 1px var(--shadowColor));
+    }
+    &:active {
+        transition-duration: var(--activeAnimationSpeed);
+        transform: scale(0.97);
+    }
+}
+
+.handle:not(.disabled) {
+    cursor: pointer;
+    user-select: none;
+    &:hover,
+    &:focus-visible {
+        background: var(--baseAlt1Color);
+    }
+    &:active {
+        background: var(--baseAlt2Color);
+    }
+}
