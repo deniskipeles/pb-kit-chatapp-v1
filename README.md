@@ -1,7 +1,7 @@
 
 # Chat App with SvelteKit and PocketBase
 
-![Chat App Demo](https://chat.ktechs.xyz)
+[Chat App Demo](https://chat.ktechs.xyz)
 
 An open-source chat application built with SvelteKit and powered by PocketBase. The app supports end-to-end encryption for one-on-one chats and includes features for group chats.
 
